@@ -89,3 +89,12 @@
         tags:
           Name: ansible-privsub3
       register: privsub3_out
+
+    - name: Create Internet gateway with tags
+      ec2_vpc_igw:
+        vpc_id: "{{vpcout.vpc.id}}"
+        state: "{{state}}"
+        region: "{{region}}"
+        tags:
+            Name: ansible_igw
+      register: igw_out
