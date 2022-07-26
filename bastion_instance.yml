@@ -1,5 +1,5 @@
 ---
-- name: Setup Vprofile Bastion Host
+- name: Setup Bastion Host
   hosts: localhost
   connection: local
   gather_facts: no
