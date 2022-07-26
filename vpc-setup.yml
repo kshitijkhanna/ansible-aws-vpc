@@ -121,7 +121,7 @@
         wait: yes
         region: "{{region}}"
         if_exist_do_not_create: true
-      register: NATWG_out
+      register: NATGW_out
 
     - name: Set up private subnet route table
       ec2_vpc_route_table:
@@ -135,7 +135,7 @@
           - "{{ privsub3_out.subnet.id }}"
         routes:
           - dest: 0.0.0.0/0 
-            gateway_id: "{{NATWG_out.nat_gateway_id}}"
+            gateway_id: "{{NATGW_out.nat_gateway_id}}"
       register: privRT_out
 
     - debug:
@@ -150,7 +150,7 @@
         - privsub3_out.subnet.id
         - igw_out.gateway_id
         - pubRT_out.route_table.id
-        - NATWG_out.nat_gateway_id
+        - NATGW_out.nat_gateway_id
         - privRT_out.route_table.id
 
     - set_fact:
@@ -163,7 +163,7 @@
          privsub3id: "{{privsub3_out.subnet.id}}" 
          igwid: "{{igw_out.gateway_id}}"
          pubRTid: "{{pubRT_out.route_table.id}}"
-         NATWGid: "{{NATWG_out.nat_gateway_id}}"
+         NATGWid: "{{NATGW_out.nat_gateway_id}}"
          privRTid: "{{privRT_out.route_table.id}}"
          cacheable: yes
 
