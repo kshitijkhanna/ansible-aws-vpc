@@ -12,14 +12,14 @@
 
     - name: Create vprofile ec2 key
       ec2_key:
-        name: ansibleappstack-key
+        name: appstack
         region: "{{region}}"
       register: appstack_out
 
     - name: Save private key into file ansibleappstack-key.pem
       copy:
         content: "{{appstack_out.key.private_key}}"
-        dest: "./ansibleappstack-key.pem"
+        dest: "./ansibleappstack_key.pem"
         mode: 0600
       when: appstack_out.changed
   
