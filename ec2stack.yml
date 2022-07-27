@@ -14,11 +14,11 @@
       ec2_key:
         name: ansible-appstack-key
         region: "{{region}}"
-      register: ansible-appstack-key_out
+      register: appstack_out
 
     - name: Save private key into file ansible-appstack-key.pem
       copy:
-        content: "{{ansible-appstack-key_out.key.private_key}}"
+        content: "{{appstack_out.key.private_key}}"
         dest: "./ansible-appstack-key.pem"
         mode: 0600
       when: ansible-appstack-key.changed
