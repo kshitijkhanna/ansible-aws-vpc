@@ -1,4 +1,4 @@
-nginx-ami: ami-0491345e44132da45
+nginx_ami: ami-0491345e44132da45
 tamcat_ami: ami-0491345e44132da45
 memcache_ami: ami-0491345e44132da45
 rmq_ami: ami-0491345e44132da45
