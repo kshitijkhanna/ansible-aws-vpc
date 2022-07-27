@@ -21,6 +21,6 @@
         content: "{{appstack_out.key.private_key}}"
         dest: "./ansibleappstack-key.pem"
         mode: 0600
-      when: ansibleappstack-key.changed
+      when: appstack_out.changed
   
 
