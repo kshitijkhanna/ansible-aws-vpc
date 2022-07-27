@@ -1,0 +1,26 @@
+---
+- name: Setup app stack
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Import VPC setup variables
+      include_vars: vars/output_vars
+
+    - name: Import DevOps setup variables
+      include_vars: vars/appstack
+
+    - name: Create vprofile ec2 key
+      ec2_key:
+        name: ansible-appstack-key
+        region: "{{region}}"
+      register: ansible-appstack-key_out
+
+    - name: Save private key into file ansible-appstack-key.pem
+      copy:
+        content: "{{ansible-appstack-key_out.key.private_key}}"
+        dest: "./ansible-appstack-key.pem"
+        mode: 0600
+      when: ansible-appstack-key.changed
+  
+
