@@ -22,5 +22,37 @@
         dest: "./ansibleappstack_key.pem"
         mode: 0600
       when: appstack_out.changed
+
+    - name: Create Securiry Group for Load Balancer
+      ec2_group:
+        name: AnsibleELB-sg
+        description: Allow port 80 from everywhere and all port within sg
+        region: "{{region}}"
+        vpc_id: "{{vpcid}}"
+        rules:
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+      register: AnsibleELBSG_out
+
+    - name: Create Securiry Group for APP Stack
+      ec2_group:
+        name: appstack-sg
+        description: Allow port 22 from everywhere and all port within sg
+        region: "{{region}}"
+        vpc_id: "{{vpcid}}"
+        purge_rules: no
+        rules:
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            group_id: "{{AnsibleELBSG_out.group_id}}"
+
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            group_id: "{{BastionSGid}}"
+      register: appStackSG_out  
   
 
