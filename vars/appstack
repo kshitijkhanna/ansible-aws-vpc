@@ -1,5 +1,5 @@
 nginx_ami: ami-08d4ac5b634553e16
-tamcat_ami: ami-08d4ac5b634553e16
+tomcat_ami: ami-08d4ac5b634553e16
 memcache_ami: ami-08d4ac5b634553e16
 rmq_ami: ami-08d4ac5b634553e16
 mysql_ami: ami-08d4ac5b634553e16
